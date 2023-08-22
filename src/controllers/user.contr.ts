@@ -4,7 +4,7 @@ import userSchema from "../schemas/user.schema.js";
 import { JWT } from "../utils/jwt.js";
 export default {
   async get(req: Request, res: Response) {
-    try {
+    try { 
       const token = req.headers.token as string;
       const userId = JWT.VERIFY(token).id;
       const user = await userSchema.findById(userId).populate("posts");
