@@ -11,7 +11,7 @@ export default {
       if (user?.role == "user") {
         return res.status(200).json(user);
     } else if (user?.role == "admin") {
-          let allUser = await userSchema.find()
+          let allUser = await userSchema.find().populate("posts");
         return res.status(200).json(allUser);
       }
     } catch (error:any) {
