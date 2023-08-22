@@ -6,3 +6,5 @@ export interface IContact extends Document {
     content: string;
     userId: Types.ObjectId | undefined;
 }
+
+export interface IUpdateContact extends Partial<IContact> {}
