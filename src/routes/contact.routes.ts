@@ -1,5 +1,5 @@
 import express from 'express';
-import ContactController from '../controllers/contact.contr';
+import ContactController from '../controllers/contact.contr.js';
 import authMiddleware from '../middleware/auth';
 let router = express.Router();
 router.get('/', ContactController.getContacts)
