@@ -17,6 +17,20 @@ class ContactController {
             res.status(500).send({ success: false, error: error.message });
         }
     }
+    static async getContactById(req: Request, res: Response) {
+        try {
+            let contactId = req.params.id
+            const contacts = await ContactModel.findById(contactId);
+            res.status(200).send({
+                success: true,
+                data: contacts
+            });
+        }
+        catch (error: any) {
+            console.log('error.message :', error.message);
+            res.status(500).send({ success: false, error: error.message });
+        }
+    }
     static async createContact(req: Request, res: Response) {
         try {
             let token = req.headers.token as string;
