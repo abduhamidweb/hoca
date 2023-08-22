@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import sha256 from "sha256";
 import userSchema from "../schemas/user.schema.js";
 import { JWT } from "../utils/jwt.js";
 export default {
@@ -12,7 +13,7 @@ export default {
         return res.status(400).json({ message: "Invalid role" });
       let user = new userSchema({
         userEmail,
-        password,
+        password: sha256(password),
         role,
       });
         await user.save()
