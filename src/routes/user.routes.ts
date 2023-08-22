@@ -7,8 +7,8 @@ const router = Router();
 
 router.get("/",tokenChecker, get); 
 router.post("/", post); 
-router.put("/", put); 
+router.put("/:id", put); 
 router.post("/", login); 
-router.delete("/", del); 
+router.delete("/:id", del); 
 
 export default router

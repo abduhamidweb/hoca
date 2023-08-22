@@ -24,7 +24,7 @@ const UserChema = new Schema({
     type: [
       {
         ref: "Contact",
-        type: [mongoose.Types.ObjectId,"Invalid ID"],
+        type: [mongoose.Types.ObjectId, "Invalid ID"],
       },
     ],
   },
