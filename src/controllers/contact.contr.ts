@@ -101,7 +101,7 @@ class ContactController {
       res.status(500).json({ success: false, error: error.message });
     }
   }
-
+ 
   static async deleteContact(req: Request, res: Response) {
     try {
       let token = req.headers.token as string;
