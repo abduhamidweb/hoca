@@ -1,7 +1,7 @@
 import { JWT } from "../utils/jwt";
 import { Request, Response } from "express";
 import { IContact, IUpdateContact } from "../interface/interface";
-// import userModel from '../schemas/user.schema.js';
+import userModel from '../schemas/user.schema.js';
 import ContactModel from "../schemas/contact.schema.js";
 import error from "../Responser/error.js";
 class ContactController {
@@ -49,11 +49,11 @@ class ContactController {
       const savedContact = await newContact.save();
 
       // Userning posts uchun
-      // userModel.findByIdAndUpdate(id, {
-      // $push: {
-      // posts:savedContact._id
-      // }
-      // })
+     await userModel.findByIdAndUpdate(id, {
+      $push: {
+      posts:savedContact._id
+      }
+      })
       // /////////////////////////////////////////////////
       res.status(201).send({
         success: true,
