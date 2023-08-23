@@ -58,7 +58,8 @@ export default {
     },
     put(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const token = req.headers.token;
+            let id = JWT.VERIFY(token).id;
             let { userEmail, password } = req.body;
             const hashedPass = sha256(password);
             try {
@@ -97,7 +98,8 @@ export default {
     },
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id = req.params.id;
+            const token = req.headers.token;
+            let id = JWT.VERIFY(token).id;
             try {
                 const deletedUser = yield userSchema.findByIdAndDelete(id);
                 if (!deletedUser) {

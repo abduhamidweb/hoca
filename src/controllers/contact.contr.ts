@@ -1,4 +1,4 @@
-import { JWT } from "../utils/jwt";
+import { JWT } from "../utils/jwt.js";
 import { Request, Response } from "express";
 import { IContact, IUpdateContact } from "../interface/interface";
 import userModel from '../schemas/user.schema.js';
@@ -37,13 +37,13 @@ class ContactController {
       if (!id) {
         throw new Error("Invalid Id");
       }
-      const { fullName, email, phone, content, userId }: IContact = req.body;
+      const { fullName, email, phone, content }: IContact = req.body;
       const newContactData = {
         fullName,
         email,
         phone,
         content,
-        userId,
+        userId:id,
       };
       const newContact = new ContactModel(newContactData);
       const savedContact = await newContact.save();
@@ -86,7 +86,7 @@ class ContactController {
       }
 
       const updatedContact = await ContactModel.findByIdAndUpdate(
-        { id: contact_id, ...updateData },
+        { _id: contact_id, ...updateData },
         { new: true }
       );
 
