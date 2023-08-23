@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { JWT } from "../utils/jwt";
-// import userModel from '../schemas/user.schema.js';
+import { JWT } from "../utils/jwt.js";
+import userModel from '../schemas/user.schema.js';
 import ContactModel from "../schemas/contact.schema.js";
 import error from "../Responser/error.js";
 class ContactController {
@@ -51,22 +51,22 @@ class ContactController {
                 if (!id) {
                     throw new Error("Invalid Id");
                 }
-                const { fullName, email, phone, content, userId } = req.body;
+                const { fullName, email, phone, content } = req.body;
                 const newContactData = {
                     fullName,
                     email,
                     phone,
                     content,
-                    userId,
+                    userId: id,
                 };
                 const newContact = new ContactModel(newContactData);
                 const savedContact = yield newContact.save();
                 // Userning posts uchun
-                // userModel.findByIdAndUpdate(id, {
-                // $push: {
-                // posts:savedContact._id
-                // }
-                // })
+                yield userModel.findByIdAndUpdate(id, {
+                    $push: {
+                        posts: savedContact._id
+                    }
+                });
                 // /////////////////////////////////////////////////
                 res.status(201).send({
                     success: true,
@@ -96,7 +96,7 @@ class ContactController {
                 if (!check_id) {
                     return res.status(404).json({ message: "Contact not found." });
                 }
-                const updatedContact = yield ContactModel.findByIdAndUpdate(Object.assign({ id: contact_id }, updateData), { new: true });
+                const updatedContact = yield ContactModel.findByIdAndUpdate(Object.assign({ _id: contact_id }, updateData), { new: true });
                 res.send({
                     status: 200,
                     message: `Contact was updated successfuly!`,
