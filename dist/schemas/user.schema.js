@@ -19,13 +19,11 @@ const UserChema = new Schema({
         enum: ["user", "admin"],
         default: "user",
     },
-    posts: {
-        type: [
-            {
-                ref: "Contact",
-                type: [mongoose.Types.ObjectId, "Invalid ID"],
-            },
-        ],
-    },
+    posts: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "Contact"
+        }
+    ]
 });
 export default model("User", UserChema);

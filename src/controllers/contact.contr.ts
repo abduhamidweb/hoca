@@ -7,7 +7,7 @@ import error from "../Responser/error.js";
 class ContactController {
   static async getContacts(req: Request, res: Response) {
     try {
-      const contacts = await ContactModel.find();
+      const contacts = await ContactModel.find().populate("userId");
       res.status(200).send({
         success: true,
         data: contacts,
@@ -20,7 +20,7 @@ class ContactController {
   static async getContactById(req: Request, res: Response) {
     try {
       let contactId = req.params.id;
-      const contacts = await ContactModel.findById(contactId);
+      const contacts = await ContactModel.findById(contactId).populate('userId');
       res.status(200).send({
         success: true,
         data: contacts,
@@ -50,10 +50,10 @@ class ContactController {
 
       // Userning posts uchun
      await userModel.findByIdAndUpdate(id, {
-      $push: {
-      posts:savedContact._id
-      }
-      })
+                     $push: {
+                         posts: savedContact._id,
+                     },
+                 });
       // /////////////////////////////////////////////////
       res.status(201).send({
         success: true,

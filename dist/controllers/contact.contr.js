@@ -15,7 +15,7 @@ class ContactController {
     static getContacts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const contacts = yield ContactModel.find();
+                const contacts = yield ContactModel.find().populate("userId");
                 res.status(200).send({
                     success: true,
                     data: contacts,
@@ -31,7 +31,7 @@ class ContactController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let contactId = req.params.id;
-                const contacts = yield ContactModel.findById(contactId);
+                const contacts = yield ContactModel.findById(contactId).populate('userId');
                 res.status(200).send({
                     success: true,
                     data: contacts,
@@ -64,8 +64,8 @@ class ContactController {
                 // Userning posts uchun
                 yield userModel.findByIdAndUpdate(id, {
                     $push: {
-                        posts: savedContact._id
-                    }
+                        posts: savedContact._id,
+                    },
                 });
                 // /////////////////////////////////////////////////
                 res.status(201).send({
