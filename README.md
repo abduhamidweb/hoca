@@ -1,5 +1,5 @@
-# Job apply
-## Project Name and Description: Job Apply - Convenient Job Search Tool for Job Seekers
+# Hoca
+## Project Name and Description: Hoca - Convenient Job Search Tool for Job Seekers
 ### This project is created to alleviate the difficulties of job searching for job seekers. It provides additional support for job seekers who are struggling to find suitable jobs.
 ## Project Objective:
 ### The main objective of this project is to expedite the job search process and make it more convenient for job seekers.
