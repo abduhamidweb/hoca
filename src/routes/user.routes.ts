@@ -9,7 +9,7 @@ const router = Router();
 router.get("/",tokenChecker, get); 
 router.post("/", post); 
 router.put("/",authMiddleware, put); 
-router.post("/", login); 
+router.post("/login", login); 
 router.delete("/",authMiddleware, del); 
 
 export default router
